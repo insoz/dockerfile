@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y gnupg apt-transport-https; \
     ACCEPT_EULA=Y apt-get install -y --no-install-recommends mssql-tools; \
 	ACCEPT_EULA=Y apt-get install -y --no-install-recommends unixodbc-dev; \
     \
-    curl -fsSL https://github.com/phpredis/phpredis/archive/${REDIS-VERSION}.tar.gz -o redis.tar.gz; \
+    curl -fsSL https://github.com/phpredis/phpredis/archive/$REDIS-VERSION.tar.gz -o redis.tar.gz; \
     mkdir -p /tmp/redis; \
     tar -xf redis.tar.gz -C /tmp/redis --strip-components=1; \
     rm redis.tar.gz; \
