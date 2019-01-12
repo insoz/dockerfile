@@ -6,12 +6,12 @@ COPY ./sources.list /etc/apt/sources.list
 
 RUN apt-get update && apt-get install -y gnupg apt-transport-https; \
     curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -; \
-	curl https://packages.microsoft.com/config/debian/9/prod.list > /etc/apt/sources.list.d/mssql-release.list; \
-	apt-get update; \
-	apt-get install -y --no-install-recommends libfreetype6-dev libjpeg62-turbo-dev zlib1g-dev libpng-dev; \
+    curl https://packages.microsoft.com/config/debian/9/prod.list > /etc/apt/sources.list.d/mssql-release.list; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends libfreetype6-dev libjpeg62-turbo-dev zlib1g-dev libpng-dev; \
     ACCEPT_EULA=Y apt-get install -y --no-install-recommends msodbcsql17; \
     ACCEPT_EULA=Y apt-get install -y --no-install-r\ecommends mssql-tools; \
-	ACCEPT_EULA=Y apt-get install -y --no-install-recommends unixodbc-dev; \
+    ACCEPT_EULA=Y apt-get install -y --no-install-recommends unixodbc-dev; \
     \
     docker-php-ext-install pdo gd pdo_mysql zip; \
     pecl channel-update pecl.php.net; \
