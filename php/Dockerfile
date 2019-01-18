@@ -4,7 +4,7 @@ LABEL maintainer="Leon <nian0408@foxmail.com>"
 
 COPY ./sources.list /etc/apt/sources.list
 
-RUN apt-get update && apt-get install -y gnupg apt-transport-https; \
+RUN apt-get update && apt-get install -y gnupg apt-transport-https procps net-tools lsof; \
     curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -; \
     curl https://packages.microsoft.com/config/debian/9/prod.list > /etc/apt/sources.list.d/mssql-release.list; \
     apt-get update; \
