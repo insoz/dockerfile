@@ -20,4 +20,5 @@ RUN apt-get update && apt-get install -y gnupg apt-transport-https procps net-to
     docker-php-ext-enable redis gd pdo_mysql pdo_sqlsrv sqlsrv; \
     \
     rm -rf /var/lib/apt/lists/*; \
-    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false
+    apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+    sed -i 's/clear_env = no/clear_env = yes/g' /usr/local/etc/php-fpm.d/docker.conf
