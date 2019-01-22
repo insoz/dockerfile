@@ -4,7 +4,7 @@ LABEL maintainer="Leon <nian0408@foxmail.com>"
 
 COPY ./sources.list /etc/apt/sources.list
 
-RUN apt-get update && apt-get install -y gnupg apt-transport-https procps net-tools lsof; \
+RUN apt-get update && apt-get install -y gnupg apt-transport-https procps net-tools lsof vim; \
     curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -; \
     curl https://packages.microsoft.com/config/debian/9/prod.list > /etc/apt/sources.list.d/mssql-release.list; \
     apt-get update; \
@@ -21,4 +21,10 @@ RUN apt-get update && apt-get install -y gnupg apt-transport-https procps net-to
     \
     rm -rf /var/lib/apt/lists/*; \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
-    sed -i 's/clear_env = no/clear_env = yes/g' /usr/local/etc/php-fpm.d/docker.conf
+    sed -i "s/clear_env = no/clear_env = yes/g" /usr/local/etc/php-fpm.d/docker.conf; \
+    echo "php_flag[display_errors] = on" >> /usr/local/etc/php-fpm.d/www.conf; \
+    echo "php_admin_value[memory_limit] = 128M" >> /usr/local/etc/php-fpm.d/www.conf; \
+    echo "php_admin_flag[log_errors] = on" >> /usr/local/etc/php-fpm.d/www.conf; \
+    echo "log_errors = On" >> /usr/local/etc/php/conf.d/docker-vars.ini; \
+    echo "post_max_size = 500M" >> /usr/local/etc/php/conf.d/docker-vars.ini; \
+    echo "upload_max_filesize = 500M" >> /usr/local/etc/php/conf.d/docker-vars.ini;
