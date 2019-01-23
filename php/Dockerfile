@@ -3,6 +3,7 @@ FROM php:7.2.1-fpm-stretch
 LABEL maintainer="Leon <nian0408@foxmail.com>"
 
 COPY ./sources.list /etc/apt/sources.list
+COPY ./php.ini /usr/local/etc/php/conf.d/php.ini
 
 RUN apt-get update && apt-get install -y gnupg apt-transport-https procps net-tools lsof vim; \
     curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -; \
@@ -24,7 +25,4 @@ RUN apt-get update && apt-get install -y gnupg apt-transport-https procps net-to
     sed -i "s/clear_env = no/clear_env = yes/g" /usr/local/etc/php-fpm.d/docker.conf; \
     echo "php_flag[display_errors] = on" >> /usr/local/etc/php-fpm.d/www.conf; \
     echo "php_admin_value[memory_limit] = 128M" >> /usr/local/etc/php-fpm.d/www.conf; \
-    echo "php_admin_flag[log_errors] = on" >> /usr/local/etc/php-fpm.d/www.conf; \
-    echo "log_errors = On" >> /usr/local/etc/php/conf.d/docker-vars.ini; \
-    echo "post_max_size = 500M" >> /usr/local/etc/php/conf.d/docker-vars.ini; \
-    echo "upload_max_filesize = 500M" >> /usr/local/etc/php/conf.d/docker-vars.ini;
+    echo "php_admin_flag[log_errors] = on" >> /usr/local/etc/php-fpm.d/www.conf;
